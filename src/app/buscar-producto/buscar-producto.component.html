@@ -1,0 +1,39 @@
+<h2>Buscar Producto</h2>
+
+<!-- Barra de búsqueda y botón -->
+<div>
+  <mat-form-field appearance="outline">
+    <mat-label>ID del Producto</mat-label>
+    <input matInput [formControl]="productIdControl" placeholder="Ingrese el ID del producto">
+</mat-form-field>
+  
+  <button mat-flat-button color="primary" (click)="buscarProducto()">Buscar</button>
+</div>
+
+<!-- Tabla de productos -->
+<table mat-table [dataSource]="Products" class="mat-elevation-z8 indice-elementos">
+    <!-- Columna para el nombre del producto -->
+    <ng-container matColumnDef="Nombre">
+        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td mat-cell *matCellDef="let product">{{ product.productName }}</td>
+    </ng-container>
+
+    <!-- Columna para el precio -->
+    <ng-container matColumnDef="Precio">
+        <th mat-header-cell *matHeaderCellDef> Precio </th>
+        <td mat-cell *matCellDef="let product">{{ product.price }}</td>
+    </ng-container>
+
+    <!-- Columna para las acciones (Borrar) -->
+    <ng-container matColumnDef="Acciones">
+        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+        <td mat-cell *matCellDef="let product">
+            <button mat-flat-button color="warn" (click)="borrar(product.productID)">Borrar</button>
+        </td>
+    </ng-container>
+
+    <!-- Fila de cabecera -->
+    <tr mat-header-row *matHeaderRowDef="columnasAMostrar"></tr>
+    <!-- Fila de contenido -->
+    <tr mat-row *matRowDef="let row; columns: columnasAMostrar"></tr>
+</table>
